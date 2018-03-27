@@ -107,7 +107,7 @@ const articleInfo = [
 ]
 
 function generateTitle (teamId, index) {
-  return  teamId[0].toUpperCase()  teamId.slice(1)  ' '  articleInfo[index].title
+  return  teamId[0].toUpperCase() + teamId.slice(1) + ' ' + articleInfo[index].title
 }
 
 export function generateArticle (teamId, articleId) {
