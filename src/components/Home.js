@@ -1,9 +1,9 @@
 import React,{Component} from 'react'
-import HouseLogo from './HouseLogo'
 import { Link } from 'react-router-dom'
 
 export default class Home extends Component{
 	render(){
+		let arr=['North','Vale','Riverlands','Iron Islands','Westerlands','Crownlands','Reach','Dorne','Dragonstone'];
 		return(
 			<div className='container' >
 				<h1 className='large-header' >
@@ -12,12 +12,10 @@ export default class Home extends Component{
 				<h3 className='header text-center'>
 					Select a House
 				</h3>
-				<div className="home-grid">
-					<HouseLogo id='baratheon' width='125px' />
-					<HouseLogo id='foxes' width='125px' />
-					<HouseLogo id='hedgehogs' width='125px' />
-					<HouseLogo id='lemurs' width='125px' />
-					<HouseLogo id='koalas' width='125px' />
+				<div className="home-grid text-center">
+					{arr.map((e,i)=>(
+						<Link key={e} to={`/${e}`} style={{background:`url(${require('../sigil.jpg')}) -${130*i}px`}}>{e}</Link>
+					))}
 				</div>
 			</div>
 		)
