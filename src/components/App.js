@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from './Home'
 import Characters from './Characters'
 import Houses from './Houses'
@@ -11,7 +11,6 @@ class App extends Component {
       <Router>
       	<div>
       		<Nav />
-
       		<Switch>
 	      		<Route exact path='/' component={Home} />
 	      		<Route path='/characters' component={Characters} />

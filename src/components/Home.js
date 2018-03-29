@@ -1,11 +1,19 @@
 import React,{Component} from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { LoadingBar } from 'react-redux-loading'
+import {handleInitialData} from '../actions/datas'
 
-export default class Home extends Component{
+class Home extends Component{
+	componentDidMount(){
+		let {dispatch}=this.props;
+		dispatch(handleInitialData())
+	}
 	render(){
-		let arr=['North','Vale','Riverlands','Iron Islands','Westerlands','Crownlands','Reach','Dorne','Dragonstone'];
+		let {houses}=this.props;
 		return(
 			<div className='container' >
+				<LoadingBar />
 				<h1 className='large-header' >
 					A GAME OF THRONES IN WESTEROS
 				</h1>
@@ -13,11 +21,15 @@ export default class Home extends Component{
 					Select a House
 				</h3>
 				<div className="home-grid text-center">
-					{arr.map((e,i)=>(
-						<Link key={e} to={`/${e}`} style={{background:`url(${require('../sigil.jpg')}) -${130*i}px`}}>{e}</Link>
+					{houses.map((e,i)=>(
+						<Link key={e} to={`/${e}`} style={{background:`url('https://raw.githubusercontent.com/valarliang/data/master/sigil.jpg') -${130*i}px`}}>{e}</Link>
 					))}
 				</div>
 			</div>
 		)
 	}
 }
+
+export default connect((state)=>({
+	houses:state.houses,
+}))(Home);
