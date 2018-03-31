@@ -4,7 +4,7 @@ export default class Houses extends Component{
 	render(){
 		return(
 			<div className='container two-column' >
-				Houses
+				Seats
 			</div>
 		)
 	}
