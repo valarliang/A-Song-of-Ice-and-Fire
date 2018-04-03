@@ -111,7 +111,7 @@ ul {
 
 .avatar {
   width: 200px;
-  height: 300px;
+  height: 200px;
   border-radius: 100px;
   box-shadow: 0 0 20px -4px black;
 }
@@ -134,7 +134,7 @@ ul {
   list-style-type: none;
   font-size: 33px;
   margin: 20px 20px;
-  padding: 20px;
+  padding: 0 20px;
   text-align: center;
 }
 
@@ -239,11 +239,13 @@ ul {
 
   .avatar {
     width: 125px;
+    height: 125px;
     border-radius: 62.5px;
   }
 
   .house-avatar {
     width: 200px;
+    height: 200px;
     border-radius: 100px;
   }
 
@@ -255,7 +257,7 @@ ul {
   .info-list li {
     font-size: 20px;
     margin: 20px 10px;
-    padding: 10px;
+    padding: 0 10px;
   }
 
   .info-list div {

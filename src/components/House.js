@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import HousePanel from './HousePanel'
 import {handleHouse} from '../actions'
-import {resetHouse} from '../actions'
+import {resetPanel} from '../actions'
 
 class House extends Component {
 	comonentDidMount(){
@@ -12,7 +12,7 @@ class House extends Component {
 	}
 	componentWillUnmount(){
 		const {dispatch}=this.props
-		dispatch(resetHouse())
+		dispatch(resetPanel([]))
 	}
 	render() {
 		const {match}=this.props
@@ -22,7 +22,7 @@ class House extends Component {
         {(house)=> !house.name
           ? null
           : <div className='panel'>
-              <img className='house-avatar' src={`https://raw.githubusercontent.com/valarliang/data/master/icefireimg/${id}.jpg`} alt={house.name}/>
+              <img className='house-avatar' src={`https://raw.githubusercontent.com/valarliang/data/master/gotimg/${id}.jpg`} alt={house.name}/>
               <h1 className='medium-header'>{house.name}</h1>
               <h4 style={{margin: 10}}>
                 <Link
@@ -32,7 +32,7 @@ class House extends Component {
                 </Link>
               </h4>
               <h4>SwornMembers:{house.swornMembers.length}</h4>
-              <div className='panel-title'>{house.words?`"${house.words}"`:'_'}</div>
+              <div className='panel-title'>{house.words?`"${house.words}"`:'None'}</div>
                 <ul className='info-list row'>
                   <li>CurrentLord<div>{house.currentLord}</div></li>
                   <li>CoatOfArms<div>{house.coatOfArms?house.coatOfArms:<div>unknown</div>}</div></li>

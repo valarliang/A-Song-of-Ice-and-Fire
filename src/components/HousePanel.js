@@ -2,6 +2,7 @@ import {Component} from 'react'
 import {handleHouse} from '../actions'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {resetPanel} from '../actions'
 
 class HousePanel extends Component{
 	static propTypes = {
@@ -16,6 +17,10 @@ class HousePanel extends Component{
 		const {dispatch,id}=this.props
 		const nextId=nextProps.id
 		id!==nextId && dispatch(handleHouse(nextId))
+	}
+	componentWillUnmount(){
+		const {dispatch}=this.props
+		dispatch(resetPanel([]))
 	}
 	render() {
 		return (

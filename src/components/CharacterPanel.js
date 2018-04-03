@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {handleCharacter} from '../actions'
+import {resetPanel} from '../actions'
 import slug from 'slug'
 
 class CharacterPanel extends Component{
@@ -14,11 +15,15 @@ class CharacterPanel extends Component{
 		const id=match.params.id,nextId=nextProps.match.params.id
 		id!==nextId && dispatch(handleCharacter(nextId))
 	}
+	componentWillUnmount(){
+		const {dispatch}=this.props
+		dispatch(resetPanel([]))
+	}
 	render() {
 		const {character,house,seats}=this.props
 		return !character.name? null :(
 			<div className='panel'>
-				<img className='avatar' src={`https://raw.githubusercontent.com/valarliang/data/master/icefireimg/${slug(character.name)}.jpg`} alt={character.name}/>
+				<img className='avatar' src={`https://raw.githubusercontent.com/valarliang/data/master/gotimg/${slug(character.name)}.jpg`} alt={character.name}/>
 				<h1 className='medium-header'>{character.name}</h1>
 				<div className='panel-title'>Titles</div>
 				<ul className='info-list'>

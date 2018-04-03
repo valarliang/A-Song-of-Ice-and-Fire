@@ -15,7 +15,7 @@ class Home extends Component{
 				</h3>
 				<div className="home-grid text-center">
 					{seats.map((e,i)=>(
-						<Link key={e.name} to={`/${e.id}`} style={{background:`url('https://raw.githubusercontent.com/valarliang/data/master/icefireimg/sigil.jpg') -${130*i}px`}}>{e.name}</Link>
+						<Link key={e.name} to={`/${e.id}`} style={{background:`url('https://raw.githubusercontent.com/valarliang/data/master/gotimg/sigil.jpg') -${130*i}px`}}>{e.name}</Link>
 					))}
 				</div>
 			</div>

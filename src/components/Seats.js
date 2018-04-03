@@ -22,9 +22,9 @@ class Houses extends Component{
               {(house)=> !house.name
                 ? null
                 : <div className='panel'>
-                    <img className='house-avatar' src={`https://raw.githubusercontent.com/valarliang/data/master/icefireimg/${match.params.id}.jpg`} alt={house.name}/>
+                    <img className='house-avatar' src={`https://raw.githubusercontent.com/valarliang/data/master/gotimg/${match.params.id}.jpg`} alt={house.name}/>
                     <h1 className='medium-header'>{house.name}</h1>
-                    <div className='panel-title'>{house.words?`"${house.words}"`:'_'}</div>
+                    <div className='panel-title'>{house.words?`"${house.words}"`:'None'}</div>
                     <div className="row">
 	                    <ul className='info-list' style={{marginRight:'80px'}}>
 	                      <li>CurrentLord<div>{house.currentLord}</div></li>

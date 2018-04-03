@@ -5,12 +5,13 @@ export const RECEIVE_DATA='RECEIVE_DATA'
 export const GET_MEMBERS='GET_MEMBERS'
 export const GET_CHARACTER='GET_CHARACTER'
 export const GET_HOUSE='GET_HOUSE'
-export const RESET_HOUSE='RESET_HOUSE'
+export const RESET_PANEL='RESET_PANEL'
 
-function receiveData(seats) {
+function receiveData(seats,houseInfo) {
 	return {
 		type:RECEIVE_DATA,
 		seats,
+		houseInfo,
 	}
 }
 function getMembers(members) {
@@ -31,19 +32,19 @@ function getHouse(house) {
 		house,
 	}
 }
-export function resetHouse(house=[]) {
+export function resetPanel(panel) {
 	return {
-		type:RESET_HOUSE,
-		house,
+		type:RESET_PANEL,
+		panel,
 	}
 }
 export function handleInitialData() {
 	return (dispatch)=>{
 		dispatch(showLoading())
-		return axios.get('https://raw.githubusercontent.com/valarliang/data/master/icefiredata.js')
-			.then(({data})=>{
-			let {seats}=data
-			dispatch(receiveData(seats))
+		return axios.all([axios.get('https://raw.githubusercontent.com/valarliang/data/master/gotcontents.js'),axios.get('https://raw.githubusercontent.com/valarliang/data/master/gotdata.js')])
+			.then(res=>{
+			let {seats}=res[1].data,houseInfo=res[0].data
+			dispatch(receiveData(seats,houseInfo))
 			dispatch(hideLoading())
 		})
 	}
@@ -59,13 +60,18 @@ export function handleHouse(id) {
 		dispatch(showLoading())
 		return axios.get('https://www.anapioficeandfire.com/api/houses/'+id)
 			.then(({data})=>{
-				if(!data.currentLord) data.currentLord='https://www.anapioficeandfire.com/api/characters/957'
-				axios.get(data.currentLord)
-				.then((res)=>{
-					data.currentLord=res.data.name
+				if(!data.currentLord) {
+					data.currentLord='unknown'
 					dispatch(getHouse(data))
 					dispatch(hideLoading())
-				})
+				}else{
+					axios.get(data.currentLord)
+					.then((res)=>{
+						data.currentLord=res.data.name
+						dispatch(getHouse(data))
+						dispatch(hideLoading())
+					})
+				}
 		})
 	}
 }
@@ -106,16 +112,16 @@ export function handleCharacter(id) {
 
 /**********************************/
 function all(dispatch) {
-	return axios.get('https://raw.githubusercontent.com/valarliang/data/master/icefiredata.js')
+	return axios.get('https://raw.githubusercontent.com/valarliang/data/master/gotdata.js')
 		.then(({data})=>{
 		let {characters}=data
-		characters.sort((a,b)=>a.name>b.name?1:-1)
+		characters.sort((a,b)=>a.name.split(' ').pop()>b.name.split(' ').pop()?1:-1)
 		dispatch(getMembers(characters))
 		dispatch(hideLoading())
 	})
 }
 function match(id,dispatch) {
-	return axios.all([axios.get('https://www.anapioficeandfire.com/api/houses/'+id),axios.get('https://raw.githubusercontent.com/valarliang/data/master/icefiredata.js')])
+	return axios.all([axios.get('https://www.anapioficeandfire.com/api/houses/'+id),axios.get('https://raw.githubusercontent.com/valarliang/data/master/gotdata.js')])
 		.then(([res1,res2])=>{
 		let {characters}=res2.data
 		let {swornMembers,name}=res1.data
