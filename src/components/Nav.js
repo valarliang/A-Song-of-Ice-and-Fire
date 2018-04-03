@@ -6,7 +6,7 @@ export default function Nav() {
 		<div className='container navbar' >
 			<Link to='/' >Home</Link>
 			<nav className='nav-links' >
-				<Link to='/povcharacters' >POVCharacters</Link>
+				<Link to='/characters' >Characters</Link>
 				<Link to='/seats' >Seats</Link>
 			</nav>
 		</div>

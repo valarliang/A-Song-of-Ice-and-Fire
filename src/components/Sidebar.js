@@ -10,8 +10,8 @@ Sidebar.propTypes={
 function CostomLink({to,children}) {
 	return(
 		<Route path={to.pathname} children={({match})=>(
-			<li style={{fontWeight:match?'bold':'normal'}} >
-				<Link to={to}>{match? children+' >':children}</Link>
+			<li style={{fontWeight:match?'bold':'normal',background:match?'black':''}} >
+				<Link to={to} style={{color:match?'white':''}} >{children}</Link>
 			</li>
 		)} />
 	)
@@ -23,7 +23,7 @@ export default function Sidebar({title,list,location,match}) {
 			<h3 className='header'>{title}</h3>
 			<ul className='sidebar-list'>
 				{list.map(e=>(
-					<CostomLink key={e.name} to={{pathname:`${match.url}/${e.id.slice(11)}`,search:location.search,}} >
+					<CostomLink key={e.name} to={{pathname:`${match.url}/${e.id}`,search:location.search,}} >
 						{e.name.toUpperCase()}
 					</CostomLink>
 				))}

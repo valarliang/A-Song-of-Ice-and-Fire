@@ -35,6 +35,7 @@ ul {
   font-size: 55px;
   text-align: center;
   margin: 20px 0;
+  text-shadow: 1px 1px 2px pink;
 }
 
 .header {
@@ -97,25 +98,44 @@ ul {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   max-width: 1200px;
   margin: 0 auto;
 }
 
+.panel-title {
+  font-size:33px;
+  text-shadow: 1px 1px 2px pink;
+  margin: 10px 0;
+}
+
 .avatar {
   width: 200px;
+  height: 300px;
   border-radius: 100px;
+  box-shadow: 0 0 20px -4px black;
+}
+
+.house-avatar {
+  width: 300px;
+  height: 300px;
+  border-radius: 150px;
+  box-shadow: 0 0 18px black;
 }
 
 .info-list {
   margin-bottom: 30px;
   padding: 0;
+  text-shadow: 1px 1px 2px pink;
 }
 
 .info-list li {
+  max-width: 340px;
   list-style-type: none;
   font-size: 33px;
-  margin: 20px 0;
+  margin: 20px 20px;
+  padding: 20px;
+  text-align: center;
 }
 
 .info-list div {
@@ -179,6 +199,7 @@ ul {
   border: 2px solid black;
   color: black;
   text-align: center;
+  margin-bottom: 60px;
 }
 
 .btn-main:hover {
@@ -208,6 +229,7 @@ ul {
 
   .medium-header {
     font-size: 40px;
+    text-shadow: 1px 1px 2px pink;
   }
 
   .header {
@@ -220,6 +242,11 @@ ul {
     border-radius: 62.5px;
   }
 
+  .house-avatar {
+    width: 200px;
+    border-radius: 100px;
+  }
+
   .home-grid {
     flex-direction: column;
     align-items: center;
@@ -227,6 +254,8 @@ ul {
 
   .info-list li {
     font-size: 20px;
+    margin: 20px 10px;
+    padding: 10px;
   }
 
   .info-list div {
