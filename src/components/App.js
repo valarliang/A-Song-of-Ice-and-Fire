@@ -8,6 +8,7 @@ import Seats from './Seats'
 import Nav from './Nav'
 import House from './House'
 import LoadingBar from 'react-redux-loading'
+import Contents from './Contents'
 
 class App extends Component {
   componentDidMount(){
@@ -24,8 +25,9 @@ class App extends Component {
             <Route exact path='/' component={Home} />
             <Route path='/characters' component={Characters} />
             <Route path='/seats' component={Seats} />
-            <Route path='/:id' component={House} />
-            <Route render={()=> <h1 className='text-center'>Sorry!There is nothing for browse(￣▽￣)"</h1> } />
+            <Route exact path='/:id' component={House} />
+            <Route path='/:id/contents' component={Contents} />
+            <Route render={()=> <h1 className='text-center'>oops! Sorry, there is no content here(￣▽￣)."</h1> } />
           </Switch>)}
       	</Fragment>
       </Router>

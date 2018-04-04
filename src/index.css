@@ -18,6 +18,10 @@ ul {
   list-style: none; 
 }
 
+p {
+  text-shadow: 1px 1px 1px pink;
+}
+
 .container {
   position: relative;
   max-width: 1200px;
@@ -160,34 +164,35 @@ ul {
   flex: 1;
 }
 
-.articles {
+.contents {
   margin: 0;
   padding: 0;
 }
 
-.articles li {
+.contents li {
   font-size: 28px;
   margin-bottom: 30px;
   cursor: pointer;
   list-style-type: none;
 }
 
-.article {
+.contents {
   margin: 20px;
   padding: 20px;
 }
 
-.article p {
+.contents p {
   line-height: 35px;
   font-size: 20px;
 }
 
-.article-title {
+.contents-title {
   margin: 0;
   font-weight: 300;
+  text-shadow: 1px 1px 2px pink;
 }
 
-.article-date {
+.contents-date {
   font-size: 14px;
   padding: 0;
 }
@@ -271,7 +276,7 @@ ul {
     font-size: 12px;
   }
 
-  .article {
+  .contents {
     padding: 5px;
     margin: 5px;
   }

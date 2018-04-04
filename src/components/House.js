@@ -1,9 +1,10 @@
 import React,{Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Redirect,Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import HousePanel from './HousePanel'
 import {handleHouse} from '../actions'
 import {resetPanel} from '../actions'
+import slug from 'slug'
 
 class House extends Component {
 	comonentDidMount(){
@@ -15,8 +16,11 @@ class House extends Component {
 		dispatch(resetPanel([]))
 	}
 	render() {
-		const {match}=this.props
+		const {loading,match,contents,seats}=this.props
 		const {id}=match.params
+		if (!loading && !seats.some(e=>e.id.toString()===id)) {
+			return <Redirect to='/' />
+		}
 		return (
       <HousePanel id={id}>
         {(house)=> !house.name
@@ -33,18 +37,35 @@ class House extends Component {
               </h4>
               <h4>SwornMembers:{house.swornMembers.length}</h4>
               <div className='panel-title'>{house.words?`"${house.words}"`:'None'}</div>
-                <ul className='info-list row'>
-                  <li>CurrentLord<div>{house.currentLord}</div></li>
-                  <li>CoatOfArms<div>{house.coatOfArms?house.coatOfArms:<div>unknown</div>}</div></li>
-                  <li>Region<div>{house.region}</div></li>
-                  <li>Seats<div>{house.seats.join('/')}</div></li>
-                </ul>
+              <ul className='info-list row'>
+                <li>CurrentLord<div>{house.currentLord}</div></li>
+                <li>CoatOfArms<div>{house.coatOfArms?house.coatOfArms:<div>unknown</div>}</div></li>
+                <li>Region<div>{house.region}</div></li>
+                <li>Seats<div>{house.seats.join('/')}</div></li>
+              </ul>
+              <h2 className='header'>Contents</h2>
+              <ul className='contents'>
+                {contents.map((e) => (
+                  <li key={e}>
+                    <Link to={`${match.url}/contents/${slug(e)}`}>
+                      <h4 className='contents-title'>{e}</h4>
+                    </Link>
+                  </li>))}
+              </ul>
             </div>}
       </HousePanel>
 		);
 	}
 }
 
-export default connect(({houseInfo})=>({
-	houseInfo
-}))(House)
+function mapStateToProps({houseInfo,seats},{match}) {
+	const id=match.params.id
+	const contents=Object.keys(houseInfo[362]) //houseInfo[id]
+	return {
+		contents,
+		seats,
+		loading:!seats[0]
+	}
+}
+
+export default connect(mapStateToProps)(House)

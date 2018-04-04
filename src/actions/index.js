@@ -110,7 +110,7 @@ export function handleCharacter(id) {
 }
 
 
-/**********************************/
+/***************invoking*******************/
 function all(dispatch) {
 	return axios.get('https://raw.githubusercontent.com/valarliang/data/master/gotdata.js')
 		.then(({data})=>{
