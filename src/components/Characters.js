@@ -3,29 +3,18 @@ import {Route} from 'react-router-dom'
 import Sidebar from './Sidebar'
 import {connect} from 'react-redux'
 import {parse} from 'query-string'
-import {resetPanel} from '../actions'
 import {handleMembers} from '../actions'
 import CharacterPanel from './CharacterPanel'
+import slug from 'slug'
 
 class Characters extends Component{
 	componentDidMount(){
-		const {location,dispatch}=this.props;
-		location.search
-		? dispatch(handleMembers(parse(location.search).houseId))
-		: dispatch(handleMembers())
-	}
-	componentWillReceiveProps(nextProps){
-		const {location,dispatch}=this.props;
-		location.search && nextProps.location.search!==location.search
-		&& dispatch(handleMembers())
-	}
-	componentWillUnmount(){
-		const {dispatch}=this.props
-		dispatch(resetPanel([]))
+		const {dispatch,members}=this.props;
+		if(!members[0])dispatch(handleMembers())
 	}
 	render(){
 		const {members,match,location}=this.props;
-		return (
+		return !members[0]? null : (
 			<div className='container two-column' >
 				<Sidebar 
 					title='POV Characters'
@@ -42,6 +31,11 @@ class Characters extends Component{
 	}
 }
 
-export default connect(({members})=>({
-	members,
-}))(Characters)
+function mapStateToProps({members},{location,match}) {
+	if(location.search){
+		members=members.filter(e=>e.house.some(el=>slug(el)===parse(location.search).houseId))
+	}
+	return {members}
+}
+
+export default connect(mapStateToProps)(Characters)

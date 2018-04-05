@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import slug from 'slug'
 
 class Home extends Component{
 	render(){
@@ -15,7 +16,7 @@ class Home extends Component{
 				</h3>
 				<div className="home-grid text-center">
 					{seats.map((e,i)=>(
-						<Link key={e.name} to={`/${e.id}`} style={{background:`url('https://raw.githubusercontent.com/valarliang/data/master/gotimg/sigil.jpg') -${130*i}px`}}>{e.name}</Link>
+						<Link key={e.name} to={`/${slug(e.name)}`} style={{background:`url('https://raw.githubusercontent.com/valarliang/data/master/gotimg/sigil.jpg') -${130*i}px`}}>{e.name}</Link>
 					))}
 				</div>
 			</div>

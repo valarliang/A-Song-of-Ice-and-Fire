@@ -48,6 +48,13 @@ p {
   font-size: 35px;
 }
 
+.article-header {
+  margin: 20px 0;
+  font-weight: 300;
+  font-size: 35px;
+  text-shadow: 1px 1px 2px pink;
+}
+
 .center {
   display: block;
   margin: 0 auto;
@@ -164,10 +171,6 @@ p {
   flex: 1;
 }
 
-.contents {
-  margin: 0;
-  padding: 0;
-}
 
 .contents li {
   font-size: 28px;
@@ -188,6 +191,7 @@ p {
 
 .contents-title {
   margin: 0;
+  text-align: center;
   font-weight: 300;
   text-shadow: 1px 1px 2px pink;
 }
@@ -221,6 +225,20 @@ p {
 .championships li {
   list-style-type: none;
   margin: 0 10px;
+}
+
+.fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.fade-exit {
+  display: none;
 }
 
 @media (max-width: 680px) {

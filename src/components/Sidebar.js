@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, Route } from 'react-router-dom'
+import slug from 'slug'
 
 Sidebar.propTypes={
 	title:PropTypes.string.isRequired,
@@ -23,7 +24,7 @@ export default function Sidebar({title,list,location,match}) {
 			<h3 className='header'>{title}</h3>
 			<ul className='sidebar-list'>
 				{list.map(e=>(
-					<CostomLink key={e.name} to={{pathname:`${match.url}/${e.id}`,search:location.search,}} >
+					<CostomLink key={e.name} to={{pathname:`${match.url}/${slug(e.name)}`,search:location.search,}} >
 						{e.name.toUpperCase()}
 					</CostomLink>
 				))}
