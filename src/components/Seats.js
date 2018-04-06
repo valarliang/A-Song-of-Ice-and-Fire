@@ -3,6 +3,7 @@ import {Route,Link} from 'react-router-dom'
 import Sidebar from './Sidebar'
 import {connect} from 'react-redux'
 import HousePanel from './HousePanel'
+import slug from 'slug'
 
 class Houses extends Component{
 	render(){
@@ -16,13 +17,13 @@ class Houses extends Component{
 				{location.pathname==='/seats'
 					?<div className='sidebar-instruction header'>Select a seat</div>
 					:null}
-				<Route path={`${match.url}/:id`} render={({match})=>(
+				<Route path={`${match.url}/:id`} render={({match:{params}})=>(
           <div className='panel'>
-            <HousePanel id={match.params.id}>
+            <HousePanel id={params.id}>
               {(house)=> !house.name
                 ? null
                 : <div className='panel'>
-                    <img className='house-avatar' src={`https://raw.githubusercontent.com/valarliang/data/master/gotimg/${match.params.id}.jpg`} alt={house.name}/>
+                    <img className='house-avatar' src={`https://raw.githubusercontent.com/valarliang/data/master/gotimg/${slug(seats.find(e=>e.id===Number(params.id)).name)}.jpg`} alt={house.name}/>
                     <h1 className='medium-header'>{house.name}</h1>
                     <div className='panel-title'>{house.words?`"${house.words}"`:'None'}</div>
                     <div className="row">
@@ -37,7 +38,7 @@ class Houses extends Component{
                     </div>
                     <Link
                       className='center btn-main'
-                      to={`/${match.params.id}`}>
+                      to={`/${params.id}`}>
                         House Page
                     </Link>
                   </div>}

@@ -35,9 +35,8 @@ class Contents extends Component {
 		);
 	}
 }
-function mapStateToProps({houseInfo},{match}) {
-	const id=match.params.id
-	const contents=houseInfo[362]    //houseInfo[id]
+function mapStateToProps({houseInfo},{match:{params}}) {
+	const contents=houseInfo[362]    //houseInfo[params.id]
 	const list=Object.keys(contents).map(e=>({ 
 		name:e,
 		id:slug(e)

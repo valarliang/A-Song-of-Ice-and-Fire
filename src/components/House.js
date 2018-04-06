@@ -16,9 +16,10 @@ class House extends Component {
 		dispatch(resetPanel([]))
 	}
 	render() {
-		const {loading,match,contents,seats}=this.props
+		const {img,loading,match,contents,seats}=this.props
 		const {id}=match.params
-		if (!loading && !seats.some(e=>e.id.toString()===id)) {
+    const seat=seats.find(e=>e.id===Number(id))
+		if (!loading && !seat) {
 			return <Redirect to='/' />
 		}
 		return (
@@ -26,7 +27,7 @@ class House extends Component {
         {(house)=> !house.name
           ? null
           : <div className='panel'>
-              <img className='house-avatar' src={`https://raw.githubusercontent.com/valarliang/data/master/gotimg/${id}.jpg`} alt={house.name}/>
+              <img className='house-avatar' src={`https://raw.githubusercontent.com/valarliang/data/master/gotimg/${slug(seat.name)}.jpg`} alt={house.name}/>
               <h1 className='medium-header'>{house.name}</h1>
               <h4 style={{margin: 10}}>
                 <Link
@@ -58,9 +59,8 @@ class House extends Component {
 	}
 }
 
-function mapStateToProps({houseInfo,seats},{match}) {
-	const id=match.params.id
-	const contents=Object.keys(houseInfo[362]) //houseInfo[id]
+function mapStateToProps({houseInfo,seats},{match:{params}}) {
+	const contents=Object.keys(houseInfo[362]) //houseInfo[params.id]
 	return {
 		contents,
 		seats,
